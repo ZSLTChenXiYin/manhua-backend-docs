@@ -1,5 +1,10 @@
 # 设备模块 API 文档
-
+1. [设备注册](#1-设备注册)
+2. [获取邀请码和邀请数量](#2-获取邀请码和邀请数量)
+3. [获取免广告时间](#3-获取免广告时间)
+4. [获取邀请用户列表](#4-获取邀请用户列表)
+5. [获取邀请分享信息](#5-获取邀请分享信息)
+6. [查询设备更新状态](#6-查询设备更新状态)
 ## 1. 设备注册
 
 ### 接口说明
@@ -9,8 +14,8 @@
 - 请求路径：`/api/v1/device/register`
 - 请求方法：POST
 - 请求头：
+  - X-Package: 应用包名
   - Content-Type: application/json
-  - Accept: \*/\*
   - versionName: 版本名称（可使用1.0.0或1.0.1）
   - versionNumber: 版本号（版本名称1.0.0对应1，1.0.1对应101）
   - appId: 应用ID（102-107，建议测试使用107）
@@ -23,7 +28,7 @@
   - platformId: 平台ID（测试使用1）
   - channelId: 渠道ID（已弃用，填1即可）
 
-### 请求参数
+- 请求参数（json）：
 ```json
 {
     "device": "string",      // 设备号（可使用安卓id）
@@ -52,6 +57,7 @@
 - 请求路径：`/api/v1/device/invitenumandcode`
 - 请求方法：GET
 - 请求头：
+  - X-Package: 应用包名
   - device: 设备号
   - appId: 应用ID
   - platformId: 平台ID
@@ -78,6 +84,7 @@
 - 请求路径：`/api/v1/device/invitetime`
 - 请求方法：GET
 - 请求头：
+  - X-Package: 应用包名
   - device: 设备号
   - appId: 应用ID
 
@@ -104,14 +111,13 @@
 - 请求路径：`/api/v1/device/myinviteuserlist`
 - 请求方法：GET
 - 请求头：
+  - X-Package: 应用包名
   - device: 设备号
   - appId: 应用ID
 
-### 请求参数
-| 参数名 | 类型 | 必填 | 说明 |
-|--------|------|------|------|
-| pageIndex | int | 是 | 页码 |
-| pageSize | int | 是 | 每页记录数 |
+- 请求参数（表单数据）：
+  - pageIndex: 页码（int）
+  - pageSize: 每页记录数（int）
 
 ### 响应信息
 ```json
@@ -143,6 +149,7 @@
 - 请求路径：`/api/v1/device/inviteshare`
 - 请求方法：GET
 - 请求头：
+  - X-Package: 应用包名
   - device: 设备号
   - appId: 应用ID
   - platformId: 平台ID
@@ -156,15 +163,15 @@
 }
 ```
 
-## 6. 查询设备更新状态（该路由目前必定返回成功）
-
+## 6. 查询设备更新状态
 ### 接口说明
-查询设备号是否更新完成。
+查询设备号是否更新完成。该路由目前必定返回成功。
 
 ### 请求信息
 - 请求路径：`/api/v1/device/queryUpdateState`
 - 请求方法：POST
 - 请求头：
+  - X-Package: 应用包名
   - Content-Type: application/json
   - X-Package: 应用包名
   - sign: 请求签名

@@ -1,6 +1,13 @@
 # 用户模块 API 文档
+1. [用户注册和登录](#1-用户注册和登录)
+2. [用户登出](#2-用户登出)
+3. [获取当前登录会员信息](#3-获取当前登录会员信息)
+4. [更新用户信息](#4-更新用户信息)
+5. [修改密码](#5-修改密码)
+6. [绑定手机号](#6-绑定手机号)
+7. [获取用户基本信息](#7-获取用户基本信息)
 
-## 1. 用户登录
+## 1. 用户注册和登录
 
 ### 接口说明
 用户登录接口，用于验证用户身份并获取访问令牌。
@@ -9,9 +16,8 @@
 - 请求路径：`/api/v1/login`
 - 请求方法：POST
 - 请求头：
-  - Content-Type: application/json
   - X-Package: 应用包名
-  - sign: 请求签名
+  - Content-Type: application/json
   - device: 设备号
   - platformId: 平台ID
   - appId: 应用ID
@@ -57,9 +63,8 @@
 - 请求路径：`/api/v1/logout`
 - 请求方法：POST
 - 请求头：
-  - Authorization: Bearer {token}
   - X-Package: 应用包名
-  - sign: 请求签名
+  - Authorization: Bearer {token}
 
 ### 响应信息
 ```json
@@ -79,9 +84,8 @@
 - 请求路径：`/api/v1/member`
 - 请求方法：GET
 - 请求头：
-  - Authorization: Bearer {token}
   - X-Package: 应用包名
-  - sign: 请求签名
+  - Authorization: Bearer {token}
   - appId: 应用ID
 
 ### 响应信息
@@ -114,9 +118,8 @@
 - 请求路径：`/api/v1/updateprofile`
 - 请求方法：POST
 - 请求头：
-  - Authorization: Bearer {token}
   - X-Package: 应用包名
-  - sign: 请求签名
+  - Authorization: Bearer {token}
   - Content-Type: application/json
   - device: 设备号
   - appId: 应用ID
@@ -150,7 +153,6 @@
 - 请求方法：POST
 - 请求头：
   - X-Package: 应用包名
-  - sign: 请求签名
   - Content-Type: application/json
 
 - 请求参数
@@ -182,9 +184,8 @@
 - 请求路径：`/api/v1/bindMobile`
 - 请求方法：POST
 - 请求头：
-  - Authorization: Bearer {token}
   - X-Package: 应用包名
-  - sign: 请求签名
+  - Authorization: Bearer {token}
   - Content-Type: application/json
 
 - 请求参数
@@ -216,7 +217,6 @@
 - 请求方法：GET
 - 请求头：
   - X-Package: 应用包名
-  - sign: 请求签名
 
 - 请求参数（表单数据）：
   - memberId: 用户ID

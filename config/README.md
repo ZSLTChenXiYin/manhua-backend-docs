@@ -1,4 +1,7 @@
 # 配置模块 API 文档
+1. [获取系统配置](#1-获取系统配置)
+2. [检查更新](#2-检查更新)
+3. [获取第三方参数](#3-获取第三方参数)
 
 ## 1. 获取系统配置
 
@@ -9,6 +12,7 @@
 - 请求路径：`/api/v1/config`
 - 请求方法：GET
 - 请求头：
+  - X-Package: 应用包名
   - appId: 应用ID
   - platformId: 平台ID
   - channelId: 渠道ID
@@ -92,6 +96,7 @@
 - 请求路径：`/api/v1/checkupdate`
 - 请求方法：GET
 - 请求头：
+  - X-Package: 应用包名
   - appId: 应用ID
   - platformId: 平台ID
   - channelId: 渠道ID
@@ -129,6 +134,7 @@
 - 请求路径：`/api/v1/thirdparameter`
 - 请求方法：GET
 - 请求头：
+  - X-Package: 应用包名
   - appId: 应用ID
 
 ### 响应信息
