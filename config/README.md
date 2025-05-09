@@ -98,6 +98,7 @@
   - versionName: 版本名称
   - versionNumber: 版本号
   - device: 设备号
+  - channelId: 渠道ID
 
 ### 请求参数
 | 参数名 | 类型 | 必填 | 说明 |
@@ -129,35 +130,16 @@
 - 请求方法：GET
 - 请求头：
   - appId: 应用ID
-  - platformId: 平台ID
-  - channelId: 渠道ID
 
 ### 响应信息
 ```json
 {
-    "code": 0,
-    "message": "success",
+    "requestId": "3935c7e2-c246-4bd6-815a-2a592a7db95f",
+    "code": 200,
+    "msg": "获取成功",
     "data": {
-        "sms": {                     // 短信服务配置
-            "accesskeyid": "string", // 访问密钥ID
-            "accesskeysecret": "string", // 访问密钥密码
-            "logintpl": "string",    // 登录模板
-            "signname": "string"     // 签名名称
-        },
-        "cdn": {                     // CDN配置
-            "token": "string",       // 令牌
-            "accesskeyid": "string", // 访问密钥ID
-            "accesskeysecret": "string", // 访问密钥密码
-            "regionid": "string",    // 区域ID
-            "staticdomain": "string" // 静态域名
-        },
-        "obs": {                     // 对象存储配置
-            "accesskeyid": "string", // 访问密钥ID
-            "secretaccesskey": "string", // 访问密钥密码
-            "bucket": "string",      // 存储桶
-            "endpoint": "string",    // 终端节点
-            "domain": "string"       // 域名
-        }
+        "aKeyLoginIosSecret": "3dxxjk1",
+        "aKeyLoginAndroidSecret": "u83gwu1"
     }
 }
 ```
@@ -166,7 +148,7 @@
 
 | 错误码 | 说明 |
 |--------|------|
-| 0 | 成功 |
+| 200 | 成功 |
 | 400 | 请求参数错误 |
 | 401 | 未认证或认证失败 |
 | 403 | 无权限访问 |
