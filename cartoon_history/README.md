@@ -13,7 +13,7 @@
 - 请求方法：POST
 - 请求头：
   - X-Package: 应用包名
-  - Authorization: Bearer {token}
+  - Authorization: Bearer {token} （可选，用于验证会员用户身份）
   - device: 设备号
   - appId: 应用ID
   - platformId: 平台ID
