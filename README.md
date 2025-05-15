@@ -11,7 +11,7 @@
 | 请求头 | 说明 | 示例 |
 |-------|-----|------|
 | Authorization | JWT认证token，格式为"Bearer {token}" | Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9... |
-| X-Package | 应用包名，用于签名验证 | com.meimanyuan.app |
+| X-Package | 应用包名，用于日志记录 | com.meimanyuan.app |
 
 ## 通用响应格式
 
