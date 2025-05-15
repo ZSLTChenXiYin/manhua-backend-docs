@@ -19,9 +19,13 @@
   - X-Package: 应用包名
   - Content-Type: application/json
   - device: 设备号
+    - 测试数据: 1234567890
   - platformId: 平台ID
+    - 测试数据: 1
   - appId: 应用ID
+    - 测试数据: 107
   - channelId: 渠道ID（已弃用，填1即可）
+    - 测试数据: 1
 
 - 请求参数
 ```json
@@ -87,6 +91,7 @@
   - X-Package: 应用包名
   - Authorization: Bearer {token}
   - appId: 应用ID
+    - 测试数据: 107
 
 ### 响应信息
 ```json
@@ -122,7 +127,9 @@
   - Authorization: Bearer {token}
   - Content-Type: application/json
   - device: 设备号
+    - 测试数据: 1234567890
   - appId: 应用ID
+    - 测试数据: 107
 
 - 请求参数
 ```json
@@ -220,6 +227,8 @@
 
 - 请求参数（表单数据）：
   - memberId: 用户ID
+  - 示例：
+    - memberId: 446420
 
 ### 响应信息
 ```json
@@ -244,11 +253,3 @@
 | 403 | 无权限访问 |
 | 404 | 资源不存在 |
 | 500 | 服务器内部错误 |
-
-## 注意事项
-
-1. 所有需要认证的接口都必须在请求头中包含有效的JWT token
-2. 密码在传输前需要进行MD5加密
-3. 手机号验证码的有效期为5分钟
-4. 头像URL必须是完整的可访问地址
-5. 用户状态为0时无法登录系统 
