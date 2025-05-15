@@ -512,6 +512,74 @@
 
 ### 响应信息
 获取一个zip文件，文件包含chapter.json和detail.json文件。
+chapter.json文件中pictures字段解密算法（flutter版）：
+```dart
+import 'dart:convert';
+import 'package:pointycastle/api.dart';
+import 'package:pointycastle/asymmetric/api.dart';
+import 'package:pointycastle/asymmetric/rsa.dart';
+import 'package:pointycastle/key_generators/rsa_key_generator.dart';
+import 'package:pointycastle/paddings/pkcs7.dart';
+import 'package:pointycastle/paddings/pss.dart';
+import 'package:pointycastle/random/fortuna_random.dart';
+import 'package:pointycastle/signers/rsa_signer.dart';
+import 'package:pointycastle/export.dart';
+
+class RSADecryptor {
+  static String publicDecrypt(String input, String publicKeyPem) {
+    try {
+      // 解析 PEM 格式的公钥
+      final publicKeyBytes = parsePublicKeyFromPem(publicKeyPem);
+      final publicKey = RSAPublicKey(
+        BigInt.parse(publicKeyBytes['modulus'], radix: 16),
+        BigInt.parse(publicKeyBytes['exponent'], radix: 16),
+      );
+
+      // 解码 Base64 输入
+      final inputBytes = base64.decode(input);
+
+      // 创建 RSA 解密器
+      final decryptor = RSABlockCipher()
+        ..init(false, PublicKeyParameter<RSAPublicKey>(publicKey));
+
+      // 解密数据
+      final decryptedBytes = decryptor.process(inputBytes);
+
+      // 返回解密后的字符串
+      return utf8.decode(decryptedBytes);
+    } catch (e) {
+      print('解密出错: $e');
+      return '';
+    }
+  }
+
+  static Map<String, String> parsePublicKeyFromPem(String pem) {
+    final startIndex = pem.indexOf('-----BEGIN PUBLIC KEY-----');
+    final endIndex = pem.indexOf('-----END PUBLIC KEY-----');
+    if (startIndex == -1 || endIndex == -1) {
+      throw ArgumentError('无效的 PEM 格式公钥');
+    }
+
+    final pemContent = pem.substring(
+      startIndex + '-----BEGIN PUBLIC KEY-----'.length,
+      endIndex,
+    ).trim();
+
+    final decodedBytes = base64.decode(pemContent);
+    final sequence = ASN1Parser(decodedBytes).nextObject() as ASN1Sequence;
+    final bitString = sequence.elements[1] as ASN1BitString;
+    final publicKeySequence = ASN1Parser(bitString.stringValueBytes).nextObject() as ASN1Sequence;
+
+    final modulus = (publicKeySequence.elements[0] as ASN1Integer).value.toString(16);
+    final exponent = (publicKeySequence.elements[1] as ASN1Integer).value.toString(16);
+
+    return {
+      'modulus': modulus,
+      'exponent': exponent,
+    };
+  }
+}
+```
 
 ## 2. 拉取漫画封面
 
