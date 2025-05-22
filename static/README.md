@@ -596,6 +596,14 @@ class RSADecryptor {
 
 ### 响应信息
 获取一个webp图片文件，文件为漫画封面。
+若拉取图片为加密图片，解密方式如下：
+| 名称 | 值 |
+|---|---|
+| 加密模式 | 3DES/TripleDES-CBC |
+| 填充模式 | PKCS5padding |
+| 图片数据格式 | base64 |
+| 加密密码 | 3VLHgbkFN0ebMaR4e0Dz6Z2m |
+| 加密IV | FexPBFKG |
 
 ## 3. 拉取漫画图片
 
@@ -613,6 +621,14 @@ class RSADecryptor {
 
 ### 响应信息
 获取一个webp图片文件，文件为漫画图片。
+若拉取图片为加密图片，解密方式如下：
+| 名称 | 值 |
+|---|---|
+| 加密模式 | 3DES/TripleDES-CBC |
+| 填充模式 | PKCS5padding |
+| 图片数据格式 | base64 |
+| 加密密码 | 3VLHgbkFN0ebMaR4e0Dz6Z2m |
+| 加密IV | FexPBFKG |
 
 ## 其他资源
 
