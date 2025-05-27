@@ -39,8 +39,23 @@
 ## [功能映射文档](mapping/README.md)
 可以查看应用界面组件与接口的关系
 #### 1. [首页](mapping/README.md#1-首页)
+  - [公告](mapping/README.md#公告)
+  - [搜索](mapping/README.md#搜索)
+  - [分类](mapping/README.md#分类)
+  - [标签导航栏](mapping/README.md#标签导航栏)
+  - [轮播图](mapping/README.md#轮播图)
+  - [排行榜](mapping/README.md#排行榜)
+  - [推荐（新书推荐）](mapping/README.md#推荐新书推荐)
+  - [完结](mapping/README.md#完结)
+  - [最近在看](mapping/README.md#最近在看)
+  - [热门推荐](mapping/README.md#热门推荐)
 #### 2. [书架](mapping/README.md#2-书架)
+  - [最近收藏](mapping/README.md#最近收藏)
+  - [最近在看](mapping/README.md#最近在看)
+  - [猜你喜欢](mapping/README.md#猜你喜欢)
 #### 3. [我的](mapping/README.md#3-我的)
+  - [反馈找书](mapping/README.md#反馈找书)
+  - [浏览历史](mapping/README.md#浏览历史)
 
 ## 模块列表
 
