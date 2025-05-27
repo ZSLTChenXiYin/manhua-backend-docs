@@ -38,6 +38,9 @@
 
 ## [功能映射文档](mapping/README.md)
 可以查看应用界面组件与接口的关系
+#### 1. [首页](mapping/README.md#1-首页)
+#### 2. [书架](mapping/README.md#2-书架)
+#### 3. [我的](mapping/README.md#3-我的)
 
 ## 模块列表
 

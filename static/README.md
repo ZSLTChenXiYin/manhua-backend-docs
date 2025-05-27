@@ -639,11 +639,12 @@ class RSADecryptor {
 
 ### 请求信息
 - 请求主机：`staticDomain`
-- 请求路径（预组串）：`/static/cartoon/todayhot/%d.json`
+- 请求路径（预组串）：`/static/cartoon/todayhot/%d/%d.json`
   - 占位符细节（根据预组串从左到右依次向下列出）：
+    - `%d`：appId，用于区分不同的应用
     - `%d`：性别ID，用于区分不同的性别（1.男, 2.女）
   - 示例（性别：男）：
-    - 请求路径：`/static/cartoon/todayhot/1.json`
+    - 请求路径：`/static/cartoon/todayhot/108/1.json`
 - 请求方法：GET
 
 ### 响应信息
