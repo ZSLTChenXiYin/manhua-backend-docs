@@ -512,71 +512,83 @@
 
 ### 响应信息
 获取一个zip文件，文件包含chapter.json和detail.json文件。
+
 chapter.json文件中pictures字段解密算法（flutter版）：
+
+公钥解密流程分析
+- 初始化 XRsa 实例 ：通过 NewXRsa 函数，传入公钥和私钥的字节数组，创建一个 XRsa 实例。在这个过程中，会调用 getPublicKey 和 getPrivateKey 函数来解析公钥和私钥。
+- Base64 解码 ：在调用 PublicDecrypt 方法时，首先会对输入的加密字符串进行 Base64 解码，得到原始的加密字节数组。
+- 分块处理 ：使用 pubKeyIO 函数对解码后的字节数组进行分块处理，根据公钥的长度确定每个块的大小。
+- 公钥解密 ：对于每个块，调用 pubKeyDecrypt 函数进行公钥解密操作。
+- 合并结果 ：将所有块的解密结果合并成一个字节数组，并转换为字符串返回。
+
+在 Flutter 中，可以使用 pointycastle 库来实现 RSA 公钥解密。以下是一个示例代码：
 ```dart
 import 'dart:convert';
 import 'package:pointycastle/api.dart';
 import 'package:pointycastle/asymmetric/api.dart';
 import 'package:pointycastle/asymmetric/rsa.dart';
+import 'package:pointycastle/key_generators/api.dart';
 import 'package:pointycastle/key_generators/rsa_key_generator.dart';
+import 'package:pointycastle/padded_block_cipher/padded_block_cipher_impl.dart';
 import 'package:pointycastle/paddings/pkcs7.dart';
-import 'package:pointycastle/paddings/pss.dart';
+import 'package:pointycastle/block/aes.dart';
+import 'package:pointycastle/key_generators/api.dart';
+import 'package:pointycastle/key_generators/rsa_key_generator.dart';
+import 'package:pointycastle/key_generators/secure_random.dart';
+import 'package:pointycastle/rsa/oaep.dart';
+import 'package:pointycastle/rsa/rsa.dart';
+import 'package:pointycastle/rsa/rsa_pkcs1v15.dart';
 import 'package:pointycastle/random/fortuna_random.dart';
-import 'package:pointycastle/signers/rsa_signer.dart';
-import 'package:pointycastle/export.dart';
 
 class RSADecryptor {
-  static String publicDecrypt(String input, String publicKeyPem) {
-    try {
-      // 解析 PEM 格式的公钥
-      final publicKeyBytes = parsePublicKeyFromPem(publicKeyPem);
-      final publicKey = RSAPublicKey(
-        BigInt.parse(publicKeyBytes['modulus'], radix: 16),
-        BigInt.parse(publicKeyBytes['exponent'], radix: 16),
-      );
+  static String publicDecrypt(String encryptedText, String publicKeyPem) {
+    // 解析 PEM 格式的公钥
+    RSAPublicKey publicKey = _parsePublicKey(publicKeyPem);
 
-      // 解码 Base64 输入
-      final inputBytes = base64.decode(input);
+    // Base64 解码
+    List<int> encryptedBytes = base64.decode(encryptedText);
 
-      // 创建 RSA 解密器
-      final decryptor = RSABlockCipher()
-        ..init(false, PublicKeyParameter<RSAPublicKey>(publicKey));
+    // 创建 RSA 解密器
+    var decryptor = RSADecrypterPKCS1v15(publicKey);
 
-      // 解密数据
-      final decryptedBytes = decryptor.process(inputBytes);
+    // 解密数据
+    List<int> decryptedBytes = decryptor.process(encryptedBytes);
 
-      // 返回解密后的字符串
-      return utf8.decode(decryptedBytes);
-    } catch (e) {
-      print('解密出错: $e');
-      return '';
-    }
+    // 转换为字符串
+    return utf8.decode(decryptedBytes);
   }
 
-  static Map<String, String> parsePublicKeyFromPem(String pem) {
-    final startIndex = pem.indexOf('-----BEGIN PUBLIC KEY-----');
-    final endIndex = pem.indexOf('-----END PUBLIC KEY-----');
-    if (startIndex == -1 || endIndex == -1) {
-      throw ArgumentError('无效的 PEM 格式公钥');
-    }
+  static RSAPublicKey _parsePublicKey(String publicKeyPem) {
+    var publicKeyLines = publicKeyPem.split('\n');
+    var publicKeyContent = publicKeyLines
+        .where((line) =>
+            !line.startsWith('-----BEGIN PUBLIC KEY-----') &&
+            !line.startsWith('-----END PUBLIC KEY-----'))
+        .join('');
+    var publicKeyBytes = base64.decode(publicKeyContent);
 
-    final pemContent = pem.substring(
-      startIndex + '-----BEGIN PUBLIC KEY-----'.length,
-      endIndex,
-    ).trim();
+    var parser = RSAPublicKeyParser();
+    return parser.parse(publicKeyBytes) as RSAPublicKey;
+  }
+}
+```
+你可以使用以下方式调用这个类：
+```dart
+void main() {
+  String publicKeyPem = '''
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3VLHgbkFN0ebMaR4e0Dz6Z2mFexPBFKGqK0tuRhzu7XOrG92nKWfnublf2p1i22UN81whBLINjMttOuqW6fM9DCnAPTelud1zCXWYWIsv5Z19inJSG8vytJ7xg1dnfuRSRUkx11IE7bm0T/sM0sI4GgcktQJNSizyirHtuJjUUxxQabEhFkFeqQ5r+A69KjB5QkotCc4pG5lENyTARHGSsfaiJthaiH0yJ/8tUlyMgJ9H6/jbQg0wlLcEUzdfe2KuCPrTRzIzx4Cjm1JogT6JV2byvXpzAMC3O48LDiekJdVztg2Cj7E0cGrOsGs+IK6F7TWsKD/cIELTFhLz6dExQIDAQAB
+-----END PUBLIC KEY-----
+''';
 
-    final decodedBytes = base64.decode(pemContent);
-    final sequence = ASN1Parser(decodedBytes).nextObject() as ASN1Sequence;
-    final bitString = sequence.elements[1] as ASN1BitString;
-    final publicKeySequence = ASN1Parser(bitString.stringValueBytes).nextObject() as ASN1Sequence;
+  String encryptedText = 'XOa3OiaIMvlWrqGxNLyhH5mO7GPqmRWfnIvGq0kqCVDmRbqwhSSrCNEWIt+yCwpqlgsh2qnGs3h7AkbkSLmxhwGlAWLwepYtdhLOqmvi9sK1f31GaO1kMpVaUuWjT8wS5MxUJ7bb3SsWKirXJ41Js9EuTpLuXOzjGgmWZsctzmkGgOFgd2j+doBa77zgQBJMhYia8RlUvhR9aHqN3ZrCcjluFXUvrPagK2ATR2Sh7uBl7Nlk2vzLbTIZgvSv+6GgvsBAR4d2YLfYhuStsMDfqLjYRPHr0COMq20EkcZe2jmu7gztLX+AQb1Rd5+H/BOS+TW3jTo0jrR3hHrrFMmIKyQNqz9n5+1pU6xrz4KSjr7rkD6DhradBlMVTrWy7BqNts+ppiqRgiJ7WSL4JM1FLH0Wr28wqm0DDtPg9tNZ/lS2CTPK8pxKe6alkJLkLrIWavPm6haa2KUV0JhlaOEIFZh/wJ2SHDPkzKVE5IPRm651eW9cctBnKKzqptf0yvkWGkGRhGN+KJvhAl2+PzreH0cfuNnzoe4aN5sZVjtYtwO6ltA+OASVzu4QRuGymo34JJnOfC+g8g0eO7Cv2ET9q4PklXwmfHRSE6tZikwFp2mgKeIcCeDUREwOE5QLb+BEK4C0gA86ZbjzGGeygu+WKW560/taCK828u2EADSM16GiPOiNAHUxGJJleyKJu+eFgBGw5yNI26mT7PcOQp7q1IqIJxmLcZxV+MKOrET/wIWOFOE/u8rFzTQzia4WS7741O99CBCTNHF5fLnEouWIA0w3Pl+rEKa2rjXbBeCfjSJNALciJZ5sap09Sf8gIn5/dzXC89hLGMfC/3qNFt+y51RfamesQ/pES/RiOvF+7J7AeKxkPww2W7roAZWv6kMRwvAFGmQnXu5OqTWZwTMO3vmAk/dttWjou9wnfb6GcXkbtKeucq8qDD8/zYiX0d+bDkv+boJ52g0QI2jDm82WPJAwTu8fx3k7YDUkPlQQwO8/PMEKAkPftdHBqgHZj2SC';
 
-    final modulus = (publicKeySequence.elements[0] as ASN1Integer).value.toString(16);
-    final exponent = (publicKeySequence.elements[1] as ASN1Integer).value.toString(16);
-
-    return {
-      'modulus': modulus,
-      'exponent': exponent,
-    };
+  try {
+    String decryptedText = RSADecryptor.publicDecrypt(encryptedText, publicKeyPem);
+    print('Decrypted text: $decryptedText');
+  } catch (e) {
+    print('Decryption error: $e');
   }
 }
 ```

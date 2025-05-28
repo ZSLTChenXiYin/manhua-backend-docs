@@ -56,6 +56,7 @@
 #### 3. [我的](mapping/README.md#3-我的)
   - [反馈找书](mapping/README.md#反馈找书)
   - [浏览历史](mapping/README.md#浏览历史)
+#### 4. [广场](mapping/README.md#4-广场)
 
 ## 模块列表
 
