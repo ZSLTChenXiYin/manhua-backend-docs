@@ -642,6 +642,23 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3VLHgbkFN0ebMaR4e0Dz6Z2mFexPBFKGqK0t
 | 加密密码 | 3VLHgbkFN0ebMaR4e0Dz6Z2m |
 | 加密IV | FexPBFKG |
 
+### 漫画图片使用说明
+以下为一个解码pictures字段后的结构：
+```json
+{
+  "id": 81982,  // 章节ID
+  "name": "01 柳云的烦恼",  // 章节名称
+  // 图片名，|为每张图片的分界线，static/nocpt.png为章节图片缺失时的默认图片（后端图片抓取缺失导致的）
+  "pictures": "lbeyhl.webp|4xhkqn.webp|hvf8db.webp|f7irx4.webp|9hurwp.webp|mzfyvf.webp|dyxw2x.webp|35ln64.webp|rmvrw1.webp|ojsjob.webp|l8e4qc.webp|ity0tc.webp|lo5jao.webp|j2o8to.webp|7b0eh5.webp|k4htc1.webp|yxemlc.webp|wsluee.webp|t174qa.webp|29ehn5.webp|9rx32t.webp|9d9270.webp|qjsebh.webp|76sdhb.webp|ebm0p8.webp|2d61fx.webp|w2086u.webp|n3mmne.webp|g7wxr4.webp|23ltoi.webp|7f5qzi.webp|jyvho7.webp|5qhdyq.webp|ph7p72.webp|ehxqas.webp|uazoll.webp|z5etfz.webp|miml7o.webp|akhvpv.webp|ef87sn.webp|eybv01.webp|86l638.webp|w1peln.webp|dttxki.webp|79jdo7.webp|yq6338.webp|81acre.webp|d00g5x.webp|d4ns9t.webp|bbfcch.webp|thod14.webp|static/nocpt.png|9i48uc.webp|azk06u.webp|ena5uu.webp",
+  "updatedAt": "2024-09-17T02:35:54+08:00",  // 更新时间
+  "t": 55,  // 章节总页数
+  // 章节图片尺寸
+  "sizes": [
+    {"x":800,"y":1740},{"x":800,"y":1562},{"x":800,"y":1562},{"x":800,"y":1562},{"x":800,"y":1562},{"x":800,"y":1352},{"x":800,"y":1013},{"x":800,"y":1171},{"x":800,"y":860},{"x":800,"y":837},{"x":800,"y":1331},{"x":800,"y":1765},{"x":800,"y":803},{"x":800,"y":1061},{"x":800,"y":1311},{"x":800,"y":1674},{"x":800,"y":901},{"x":800,"y":1298},{"x":800,"y":888},{"x":800,"y":913},{"x":800,"y":897},{"x":800,"y":1086},{"x":800,"y":1086},{"x":800,"y":1655},{"x":800,"y":1199},{"x":800,"y":1363},{"x":800,"y":1362},{"x":800,"y":971},{"x":800,"y":1108},{"x":800,"y":863},{"x":800,"y":1102},{"x":800,"y":1560},{"x":800,"y":1016},{"x":800,"y":863},{"x":800,"y":984},{"x":800,"y":1968},{"x":800,"y":1909},{"x":800,"y":1909},{"x":800,"y":1165},{"x":800,"y":1176},{"x":800,"y":1175},{"x":800,"y":1194},{"x":800,"y":959},{"x":800,"y":1310},{"x":800,"y":1310},{"x":800,"y":827},{"x":800,"y":809},{"x":800,"y":826},{"x":800,"y":839},{"x":800,"y":1154},{"x":800,"y":1154},{"x":0,"y":0},{"x":800,"y":1064},{"x":800,"y":1063},{"x":800,"y":1041}
+  ]
+}
+```
+
 ## 其他资源
 
 ## 1. 拉取今日热点
