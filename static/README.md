@@ -593,6 +593,84 @@ MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA3VLHgbkFN0ebMaR4e0Dz6Z2mFexPBFKGqK0t
 }
 ```
 
+detail.json中的字段详解：
+```json
+{
+  "code": 200,
+  "data": {
+    "id": 2005,  // 漫画ID
+    "categoryId": 35,  // 分类ID
+    "category": "奇幻",  // 分类名称
+    "name": "驭灵师",  // 漫画名称
+    "aliasName": "驭灵师",  // 漫画别名
+    "pinyin": "yulingshi",  // 漫画拼音
+    "author": "时代漫王",  // 作者
+    "aliasAuthor": "时代漫王",  // 作者别名
+    "protagonist": "光头配角  ",  // 主角
+    "status": 1,  // 状态（1.显示, 2.不显示）
+    "recommend": 1,  // 推荐（1.推荐, 2.不推荐）
+    "sStatus": 1,  // 采集状态（1.待采集, 2.采集中）
+    "syncState": 1,  // 同步状态（1.待同步, 2.同步成功）
+    "isEnd": 1,  // 是否完结（1.完结, 2.连载）
+    "heat": 0,  // 热度（增加通过前端搜索页统计）
+    "chapterNum": 929,  // 章节总数
+    "picture": "/2/2005/cover/x8l45m.webp",  // 封面图片
+    "posterPic": "",  // 海报图片
+    // 简介
+    "introduce": "这是一个漫画家降临自己笔下世界的冒险故事，某知名拖稿能手漫画家因一个神秘电话穿越到了自己的作品里，化身光头配角王小明，身为作者的他怎么会只甘心做个配角！可是就算是造物主又真的能改变最后的命运吗？ ",
+    "areaId": 1,  // 地区ID
+    "collectionNum": 0,  // 收藏人数
+    "chapterId": 268229,  // 最新章节ID
+    "chapterName": "第32话48 新地球篇",  // 最新章节名称
+    "chapterUpdateTime": "2025-03-15T08:01:48+08:00",  // 最新章节更新时间
+    "chapterCountErr": 0,  // 章节数量错误次数
+    "sourceCartoonId": "manga-ap101511",  // 来源漫画ID
+    "lastSourceCartoonId": "manga-ap101511",    // 上一来源漫画ID
+    "ruleId": 3,  // 规则ID
+    "lastRuleId": 2,  // 最后更新的规则ID
+    "score": 9.7,  // 评分
+    "view": 9449,  // 浏览量
+    "pv": 26772,  // 页面浏览量
+    "cartoonshelf": 8731,  // 书架数量
+    "yesterday": 20,  // 昨日浏览量
+    "lastWeek": 174,  // 最近7天浏览量
+    "lastMonth": 658,  // 最近30天浏览量
+    "commentNum": 17,  // 总评论数
+    // 章节详情
+    "chapterInfo": [
+      {
+        "name": "默认分卷",
+        "sort": 0
+      }
+    ],
+    // 源站分类
+    "sourceCategories": "热血,搞笑,穿越,战斗,冒险,奇幻,燃向,其他,少男,国漫,",
+    "updateCycle": "",  // 更新周期（更新规律，没有就不写）
+    "areaName": "",  // 地区名（根据地区id映射）
+    "tagIds": null,
+    "createdAt": "2024-10-01T12:09:54+08:00",
+    "updatedAt": "2025-03-17T19:41:15+08:00",
+    "createBy": 1,
+    "updateBy": 1,
+    "categoryName": "奇幻",
+    "pictureImages": "",
+    "tags": [
+      {
+        "tagId": 37,
+        "tagName": "冒险"
+      },
+      {
+        "tagId": 51,
+        "tagName": "奇幻"
+      }
+    ],
+    "version": 1
+  },
+  "msg": "返回成功",
+  "time": 1748417821
+}
+```
+
 ## 2. 拉取漫画封面
 
 ### 接口说明
