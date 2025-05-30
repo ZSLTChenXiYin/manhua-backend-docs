@@ -113,11 +113,56 @@
     - `%d`：标签Id，用于区分不同的标签
     - `%d`：性别Id，用于区分不同的性别（1.男, 2.女）
   - 示例（应用号：107，标签Id：100，性别：男）：
-    - 请求路径：`/static/tag/107/100/1.json`
+    - 请求路径：`/static/tag/108/40/1.json`
 - 请求方法：GET
 
 ### 响应信息
 ```json
+{
+  "code": 200,
+  "data": {
+    "list": [
+      {
+        "id": 4675,
+        "name": "超级兵王在都市",
+        "picture": "/3/4675/cover/pqy8x7.webp",
+        "posterPic": "",
+        "score": 9.3,
+        "introduce": "超级内容出品，阅文起点中文网的同名小说改编。一个魅力非凡、能力超强的退伍特种兵，被仇人满世界追杀，又被恶势力盯上，还得保护身边挚爱之人，是种什么体验？ 周四、周日更新！",
+        "isEnd": 2,
+        "author": "超级内容",
+        "aliasAuthor": "超级内容",
+        "protagonist": "",
+        "categoryId": 2,
+        "chapterName": "第三季 你竟然帮他？",
+        "chapterNum": 386,
+        "categoryName": "",
+        "zipurl": ""
+      },
+      {
+        "id": 1650,
+        "name": "娘子竟是未来暴君女帝",
+        "picture": "/1/1650/cover/k4bfs5.webp",
+        "posterPic": "",
+        "score": 9.3,
+        "introduce": "赵瑾瑜没想到自己重生之后，未过门的妻子竟会是未来篡位登基的暴君女帝。为了不让爱妻这一世误入歧途，他呕心沥血、费尽心思。只是这爱妻好似与前世不太一样，她怎么一点也不对朝堂之事上心，每日只知道黏在他身边？　　不过也好，那就是早点和娘子多生几个孩子，让她每日忙着奶娃带孩子，这样就没时间去谋造反之事。计划通！",
+        "isEnd": 2,
+        "author": "作者: 漫绘新风",
+        "aliasAuthor": "作者: 漫绘新风",
+        "protagonist": "",
+        "categoryId": 4,
+        "chapterName": "080 080",
+        "chapterNum": 83,
+        "categoryName": "",
+        "zipurl": ""
+      },
+      // ... 其他漫画信息
+    ],
+    "total_page": 1
+  },
+  "msg": "返回成功",
+  "time": 1748585245
+}
 ```
 
 ## 栏目资源
