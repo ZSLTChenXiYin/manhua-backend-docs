@@ -57,6 +57,9 @@
   - [反馈找书](mapping/README.md#反馈找书)
   - [浏览历史](mapping/README.md#浏览历史)
 #### 4. [广场](mapping/README.md#4-广场)
+#### 5. [漫评](mapping/README.md#5-漫评)
+  - [漫评](mapping/README.md#漫评)
+  - [漫评回复](mapping/README.md#漫评回复)
 
 ## 模块列表
 
@@ -191,6 +194,20 @@
   - 获取消息详情
   - 获取消息未读总数
   - 消息批量已读
+
+#### 15. [漫评模块](comment/README.md)
+  - 根据漫画id获取评论列表
+  - 评论详情
+  - ta的影评/我的影评
+  - 发表评论
+  - 点赞
+  - 删除评论
+
+#### 16. [漫评回复模块](comment_reply/README.md)
+  - 评论回复列表
+  - 发表回复
+  - 点赞回复
+  - 删除回复
 
 ## 注意事项
 
